@@ -41,6 +41,9 @@ function onCommand(session, command) {
     case 'donate':
       donate(session)
       break
+    case 'showAddress':
+      showAddress(session)
+      break
     }
 }
 
@@ -73,7 +76,7 @@ function welcome(session) {
 }
 
 function pong(session) {
-  sendMessage(session, `Pong`)
+  sendMessage(session, `Tong`)
 }
 
 // example of how to store state on each user
@@ -90,13 +93,19 @@ function donate(session) {
   })
 }
 
+function showAddress(session) {
+  // Show address tied to current session
+  sendMessage(session, session.address)
+}
+
 // HELPERS
 
 function sendMessage(session, message) {
   let controls = [
     {type: 'button', label: 'Ping', value: 'ping'},
     {type: 'button', label: 'Count', value: 'count'},
-    {type: 'button', label: 'Donate', value: 'donate'}
+    {type: 'button', label: 'Donate', value: 'donate'},
+    {type: 'button', label: 'Show Address', value: 'showAddress'}
   ]
   session.reply(SOFA.Message({
     body: message,
